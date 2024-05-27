@@ -30,7 +30,7 @@ router.post('/generateQuestions', async (req, res) => {
             }
         });
         // Send the array of questions as the response
-        res.json({ questions,lines });
+        res.send( questions[0] );
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ error: 'An error occurred while generating content.' });
