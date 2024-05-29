@@ -9,7 +9,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 // Endpoint to generate questions
 router.post('/generateQuestions', async (req, res) => {
     try {
-        console.log(req.body)
+        console.log(req.body.paragraph)
         const paragraph = "create a one question for this passage and this question students ask to professor,only start with w h questions:"+ req.body.paragraph;
         // Generate content based on the prompt
         const result = await model.generateContent(paragraph);

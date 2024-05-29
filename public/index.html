@@ -1,10 +1,66 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Testing</h1>
+    <div class="container">
+        <div class="left-side">
+            <h3>
+                Current Action: <span id="currentAction">IDEL</span>
+            </h3>
+            <div class="form-group">
+                <select id="Action" name="Action">
+                    <option value="IDEL">IDEL</option>
+                    <option value="CLAP">CLAP</option>
+                    <option value="HAND_RAISE">HAND RAISE</option>
+                    <option value="STAND_UP_AND_CLAP">STAND UP AND CLAP</option>
+                </select>
+            </div>
+            <button type="button" class="submit-button" id="setActionBtn" >SEND ACTION</button>
+        </div>
+        <div class="right-side">
+            
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const updateCurrentAction = async () => {
+                try {
+                    const response = await fetch('http://localhost:3000/Client/Action');
+                    const activeAction = await response.text();
+                    document.getElementById('currentAction').innerText = activeAction;
+                } catch (error) {
+                    console.error('Error fetching current action:', error);
+                }
+            };
+
+
+            const setAction = async () => {
+                const selectedAction = document.getElementById('Action').value;
+                try {
+                    const response = await fetch('http://localhost:3000/Client/Action', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ Action: selectedAction }),
+                    });
+                    const activeAction = await response.text();
+                    document.getElementById('currentAction').innerText = activeAction;
+                } catch (error) {
+                    console.error('Error setting action:', error);
+                }
+            };
+
+
+            document.getElementById('setActionBtn').addEventListener('click', setAction);
+            setInterval(updateCurrentAction, 500);
+        });
+    </script>
 </body>
 </html>
