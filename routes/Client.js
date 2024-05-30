@@ -11,10 +11,16 @@ const readData = () => {
     return JSON.parse(data);
 };
 
+const writeData = (data) => {
+    const filePath = path.join(__dirname, 'data.json');
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
+};
+
+
 router.get('/Action', async (req, res) => {
     try {
         const data = readData();
-        res.json(data);
+        res.send(data.Action);
         //res.send(ActiveAction);
     } catch (error) {
         console.error('Error:', error);
@@ -23,10 +29,12 @@ router.get('/Action', async (req, res) => {
 });
 router.post('/Action', async (req, res) => {
     try {
-        
         const temp = req.body.Action;
         ActiveAction = temp;
-        console.log(ActiveAction);
+        const data = readData();
+        data["Action"] = ActiveAction;
+        writeData(data);
+        console.log(data);
         res.send(ActiveAction);
     } catch (error) {
         console.error('Error:', error);
