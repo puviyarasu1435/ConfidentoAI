@@ -31,7 +31,7 @@
         document.addEventListener('DOMContentLoaded', (event) => {
             const updateCurrentAction = async () => {
                 try {
-                    const response = await fetch(window.location.href+'/Client/Action');
+                    const response = await fetch(window.location.href+'Client/Action');
                     const activeAction = await response.text();
                     document.getElementById('currentAction').innerText = activeAction;
                 } catch (error) {
@@ -43,7 +43,7 @@
             const setAction = async () => {
                 const selectedAction = document.getElementById('Action').value;
                 try {
-                    const response = await fetch(window.location.href+'/Client/Action', {
+                    const response = await fetch(window.location.href+'Client/Action', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -59,7 +59,7 @@
 
 
             document.getElementById('setActionBtn').addEventListener('click', setAction);
-            setInterval(updateCurrentAction, 500);
+            setInterval(updateCurrentAction, 5000);
         });
     </script>
 </body>
