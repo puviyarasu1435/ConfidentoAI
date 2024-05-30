@@ -11,11 +11,20 @@ const readData = () => {
     return JSON.parse(data);
 };
 
-const writeData = (data) => {
+const writeData = (newData) => {
     const filePath = path.join(__dirname, 'data.json');
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
+    try {
+        // Read existing data
+        const existingData = readData();
+        // Update existing data with new data
+        const updatedData = { ...existingData, ...newData };
+        // Write updated data back to file
+        fs.writeFileSync(filePath, JSON.stringify(updatedData, null, 2), 'utf8');
+    } catch (error) {
+        console.error('Error writing file:', error.message);
+        throw error;
+    }
 };
-
 
 router.get('/Action', async (req, res) => {
     try {
@@ -29,15 +38,14 @@ router.get('/Action', async (req, res) => {
 });
 router.post('/Action', async (req, res) => {
     try {
-        const temp = req.body.Action;
-        if (!temp) {
+        const { Action } = req.body;
+        if (!Action) {
             return res.status(400).json({ error: 'Invalid request. "Action" is required.' });
         }
-        const data = await readData();
-        data["Action"] = temp;
-        await writeData(data);
-        console.log(data);
-        res.send(temp);
+        const newData = { Action };
+        writeData(newData);
+        console.log('Updated data:', newData);
+        res.send(Action);
     } catch (error) {
         console.error('Error:', error.message);
         res.status(500).json({ error: 'An error occurred while processing your request.' });
