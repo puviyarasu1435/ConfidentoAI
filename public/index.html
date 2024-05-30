@@ -31,7 +31,7 @@
 
             const updateCurrentAction = async () => {
                 try {
-                    const response = await fetch('http://localhost:3000/Client/Action');
+                    const response = await fetch('https://confidento-b1mvtjboc-puviyarasus-projects.vercel.app/Client/Action');
                     const activeAction = await response.text();
                     document.getElementById('currentAction').innerText = activeAction;
                 } catch (error) {
@@ -43,7 +43,7 @@
             const setAction = async () => {
                 const selectedAction = document.getElementById('Action').value;
                 try {
-                    const response = await fetch('http://localhost:3000/Client/Action', {
+                    const response = await fetch('https://confidento-b1mvtjboc-puviyarasus-projects.vercel.app/Client/Action', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
