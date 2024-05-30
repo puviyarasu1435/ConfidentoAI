@@ -1,15 +1,21 @@
 const express = require('express');
 const router = express.Router();
-
-
-let ActiveAction = "IDEL";
+const fs = require('fs');
+const path = require('path');
+var ActiveAction = "IDEL";
 let AudioList = {};
 
-
+const readData = () => {
+    const filePath = path.join(__dirname, 'data.json');
+    const data = fs.readFileSync(filePath, 'utf8');
+    return JSON.parse(data);
+};
 
 router.get('/Action', async (req, res) => {
     try {
-        res.send(ActiveAction);
+        const data = readData();
+        res.json(data);
+        //res.send(ActiveAction);
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ error: 'An error occurred while generating content.' });
