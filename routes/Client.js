@@ -20,7 +20,7 @@ const writeData = (data) => {
 router.get('/Action', async (req, res) => {
     try {
         const data = readData();
-        res.send(data.Action);
+        res.send(data["Action"]);
         //res.send(ActiveAction);
     } catch (error) {
         console.error('Error:', error);
