@@ -30,15 +30,17 @@ router.get('/Action', async (req, res) => {
 router.post('/Action', async (req, res) => {
     try {
         const temp = req.body.Action;
-        ActiveAction = temp;
-        const data = readData();
-        data["Action"] = ActiveAction;
-        writeData(data);
+        if (!temp) {
+            return res.status(400).json({ error: 'Invalid request. "Action" is required.' });
+        }
+        const data = await readData();
+        data["Action"] = temp;
+        await writeData(data);
         console.log(data);
-        res.send(ActiveAction);
+        res.send(temp);
     } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: 'An error occurred while generating content.' });
+        console.error('Error:', error.message);
+        res.status(500).json({ error: 'An error occurred while processing your request.' });
     }
 });
 
