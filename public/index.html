@@ -28,7 +28,7 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
+
             const updateCurrentAction = async () => {
                 try {
                     const response = await fetch('http://localhost:3000/Client/Action');
@@ -60,7 +60,7 @@
 
             document.getElementById('setActionBtn').addEventListener('click', setAction);
             setInterval(updateCurrentAction, 500);
-        });
+    
     </script>
 </body>
 </html>
