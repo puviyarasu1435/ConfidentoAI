@@ -49,5 +49,20 @@ router.get('/GetPrefab', async (req, res) => {
         res.status(500).json({ error: 'An error occurred while retrieving PreFabList.' });
     }
 });
-
+router.get('/GetPrefab', async (req, res) => {
+    try {
+        res.json(PreFabList);
+    } catch (error) {
+        console.error('Error:', error.message);
+        res.status(500).json({ error: 'An error occurred while retrieving PreFabList.' });
+    }
+});
+router.get('/CurrentPrefab', async (req, res) => {
+    try {
+        res.send("2");
+    } catch (error) {
+        console.error('Error:', error.message);
+        res.status(500).json({ error: 'An error occurred while retrieving PreFabList.' });
+    }
+});
 module.exports = router;
