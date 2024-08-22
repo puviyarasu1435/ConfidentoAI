@@ -3,7 +3,11 @@ const router = express.Router();
 
 let ActiveAction = process.env.ACTIVE_ACTION || "IDEL"; // Default value if not set in environment variable
 let AudioList = {};
-
+let PreFabList = {
+    prefab1 : "https://firebasestorage.googleapis.com/v0/b/cofidento.appspot.com/o/assetbundles%2Fprefab1.unity3d?alt=media&token=56b5e13e-dde9-422f-8917-0a8743145715",
+    prefab2 : "https://firebasestorage.googleapis.com/v0/b/cofidento.appspot.com/o/assetbundles%2Fprefab2.unity3d?alt=media&token=1caec41f-d5a8-4521-ae01-930f00daa10f",
+    prefab3 : "https://firebasestorage.googleapis.com/v0/b/cofidento.appspot.com/o/assetbundles%2Fprefab1.unity3d?alt=media&token=56b5e13e-dde9-422f-8917-0a8743145715",
+};
 router.get('/Action', async (req, res) => {
     try {
         res.send(ActiveAction);
@@ -34,6 +38,15 @@ router.get('/AudioList', async (req, res) => {
     } catch (error) {
         console.error('Error:', error.message);
         res.status(500).json({ error: 'An error occurred while retrieving AudioList.' });
+    }
+});
+
+router.get('/GetPrefab', async (req, res) => {
+    try {
+        res.json(PreFabList);
+    } catch (error) {
+        console.error('Error:', error.message);
+        res.status(500).json({ error: 'An error occurred while retrieving PreFabList.' });
     }
 });
 
