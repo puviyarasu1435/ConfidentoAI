@@ -6,8 +6,8 @@ let ActiveAction = process.env.ACTIVE_ACTION || "IDEL"; // Default value if not 
 let AudioList = {};
 let PreFabList = {
     prefab1 : "https://firebasestorage.googleapis.com/v0/b/cofidento.appspot.com/o/assetbundles%2Fprefab1.unity3d?alt=media&token=56b5e13e-dde9-422f-8917-0a8743145715",
-    prefab2 : "https://firebasestorage.googleapis.com/v0/b/cofidento.appspot.com/o/assetbundles%2Fprefab1.unity3d?alt=media&token=56b5e13e-dde9-422f-8917-0a8743145715",
-    prefab3 : "https://firebasestorage.googleapis.com/v0/b/cofidento.appspot.com/o/assetbundles%2Fprefab1.unity3d?alt=media&token=56b5e13e-dde9-422f-8917-0a8743145715",
+    prefab2 : "https://firebasestorage.googleapis.com/v0/b/cofidento.appspot.com/o/assetbundles%2Fprefab2.unity3d?alt=media&token=1caec41f-d5a8-4521-ae01-930f00daa10f",
+    prefab3 : "https://firebasestorage.googleapis.com/v0/b/cofidento.appspot.com/o/assetbundles%2Fprefab3.unity3d?alt=media&token=01877aa4-71c5-4144-a011-834be265e568",
 };
 let PrefabNumber = "0"
 router.get('/Action', async (req, res) => {
