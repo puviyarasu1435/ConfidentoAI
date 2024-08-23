@@ -54,7 +54,7 @@ router.get('/GetPrefab', async (req, res) => {
 
 router.get('/CurrentPrefab', async (req, res) => {
     try {
-        res.send("2");
+        res.send(PrefabNumber);
     } catch (error) {
         console.error('Error:', error.message);
         res.status(500).json({ error: 'An error occurred while retrieving PreFabList.' });
