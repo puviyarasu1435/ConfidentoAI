@@ -21,6 +21,19 @@
                 </select>
             </div>
             <button type="button" class="submit-button" id="setActionBtn" >SEND ACTION</button>
+            <h3>
+                Current PreFab
+            </h3>
+            <div class="form-group">
+            <select id="ActionPrefab"  name="ActionPrefab">
+                <option value="0"></option>
+                <option value="1">Male 1</option>
+                <option value="2">Female</option>
+                <option value="3">Male 2</option>
+            </select>
+            
+        </div>
+        <button type="button" class="submit-button" id="setPrfabBtn" >SEND PREFAB</button>
         </div>
     </div>
 
@@ -54,8 +67,24 @@
                 }
             };
 
+            const setPrefab = async () => {
+                const selectedAction = document.getElementById('ActionPrefab').value;
+                try {
+                    console.log("it's Working");
+                    const response = await fetch(window.location.href+'Client/setPrefab', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ ActionPrefab: selectedAction }),
+                    });
+                } catch (error) {
+                    console.error('Error setting action:', error);
+                }
+            };
 
             document.getElementById('setActionBtn').addEventListener('click', setAction);
+            document.getElementById('setPrfabBtn').addEventListener('click', setPrefab);
             setInterval(updateCurrentAction, 5000);
         });
     </script>

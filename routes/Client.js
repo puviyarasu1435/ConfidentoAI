@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router();
 
@@ -8,6 +9,7 @@ let PreFabList = {
     prefab2 : "https://firebasestorage.googleapis.com/v0/b/cofidento.appspot.com/o/assetbundles%2Fprefab2.unity3d?alt=media&token=1caec41f-d5a8-4521-ae01-930f00daa10f",
     prefab3 : "https://firebasestorage.googleapis.com/v0/b/cofidento.appspot.com/o/assetbundles%2Fprefab1.unity3d?alt=media&token=56b5e13e-dde9-422f-8917-0a8743145715",
 };
+let PrefabNumber = "0"
 router.get('/Action', async (req, res) => {
     try {
         res.send(ActiveAction);
@@ -52,10 +54,25 @@ router.get('/GetPrefab', async (req, res) => {
 
 router.get('/CurrentPrefab', async (req, res) => {
     try {
-        res.send("1");
+        res.send("2");
     } catch (error) {
         console.error('Error:', error.message);
         res.status(500).json({ error: 'An error occurred while retrieving PreFabList.' });
+    }
+});
+router.post('/setPrefab', async (req, res) => {
+    try {
+        const { ActionPrefab } = req.body;
+        console.log(ActionPrefab);
+        if (!ActionPrefab) {
+            return res.status(400).json({ error: 'Invalid request. "PrefabNumber" is required.' });
+        }
+        PrefabNumber = ActionPrefab;
+        console.log('Updated Action:', PrefabNumber);
+        res.send(PrefabNumber);
+    } catch (error) {
+        console.error('Error:', error.message);
+        res.status(500).json({ error: 'An error occurred while processing PrefabNumber update.' });
     }
 });
 module.exports = router;
